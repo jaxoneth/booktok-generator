@@ -288,7 +288,7 @@ Requirements: High-quality book cover design, professional typography, readable 
               <div className="text-center py-12">
                 <Image className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500 text-lg mb-2">Your book cover will appear here</p>
-                <p className="text-gray-400">Fill out the form and click "Generate Book Cover"</p>
+                <p className="text-gray-400">Fill out the form and click &quot;Generate Book Cover&quot;</p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -328,6 +328,24 @@ Requirements: High-quality book cover design, professional typography, readable 
                 </div>
               </div>
             )}
+          </div>
+        </div>
+
+        <div className="mt-12 bg-white rounded-2xl shadow-xl border border-purple-100 p-8">
+          <h3 className="text-xl font-semibold text-gray-800 mb-6">Pro Tips for Better Book Covers</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <h4 className="font-medium text-purple-900 mb-2">Genre Conventions</h4>
+              <p className="text-sm text-purple-700">Different genres have visual expectations. Romance often uses soft colors and couples, while thrillers use dark, bold imagery.</p>
+            </div>
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <h4 className="font-medium text-blue-900 mb-2">Typography Matters</h4>
+              <p className="text-sm text-blue-700">Your title should be readable even as a small thumbnail. Bold, clear fonts often work better than decorative ones.</p>
+            </div>
+            <div className="bg-green-50 p-4 rounded-lg">
+              <h4 className="font-medium text-green-900 mb-2">Test Different Versions</h4>
+              <p className="text-sm text-green-700">Generate multiple variations by tweaking the prompt. A/B test with your target audience to see what resonates.</p>
+            </div>
           </div>
         </div>
       </div>
