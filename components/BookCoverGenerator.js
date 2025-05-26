@@ -204,7 +204,7 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
                     <li>• Keep titles 1-4 words for best results</li>
                     <li>• Avoid apostrophes, quotes, or special symbols</li>
                     <li>• Use simple words (avoid complex spellings)</li>
-                    <li>• Example: "The Magic Book" works better than "The Wizard's Journey"</li>
+                    <li>• Example: &quot;The Magic Book&quot; works better than &quot;The Wizard&apos;s Journey&quot;</li>
                   </ul>
                 </div>
               </div>
@@ -221,7 +221,7 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   placeholder="Author name"
                 />
-                <p className="text-xs text-gray-500 mt-1">Use simple names like "John Smith" for best text accuracy</p>
+                <p className="text-xs text-gray-500 mt-1">Use simple names like &quot;John Smith&quot; for best text accuracy</p>
               </div>
 
               <div>
@@ -345,7 +345,7 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
 
             {!showResult ? (
               <div className="text-center py-12">
-                <Image className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                <Image className="w-16 h-16 text-gray-300 mx-auto mb-4" alt="" />
                 <p className="text-gray-500 text-lg mb-2">Your book cover will appear here</p>
                 <p className="text-gray-400">Fill out the form and click &quot;Generate Book Cover&quot;</p>
                 
@@ -417,7 +417,7 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
             <div className="bg-red-50 p-4 rounded-lg">
               <h4 className="font-medium text-red-900 mb-2">❌ Avoid These</h4>
               <ul className="text-sm text-red-700 space-y-1">
-                <li>• Apostrophes: "Don't", "Can't"</li>
+                <li>• Apostrophes: &quot;Don&apos;t&quot;, &quot;Can&apos;t&quot;</li>
                 <li>• Special symbols: @, #, &</li>
                 <li>• Complex words with unusual spelling</li>
                 <li>• Very long titles (5+ words)</li>
@@ -426,8 +426,8 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
             <div className="bg-green-50 p-4 rounded-lg">
               <h4 className="font-medium text-green-900 mb-2">✅ Use These Instead</h4>
               <ul className="text-sm text-green-700 space-y-1">
-                <li>• Simple words: "The Magic Book"</li>
-                <li>• Common names: "John Smith"</li>
+                <li>• Simple words: &quot;The Magic Book&quot;</li>
+                <li>• Common names: &quot;John Smith&quot;</li>
                 <li>• 1-4 word titles work best</li>
                 <li>• Basic letters and spaces only</li>
               </ul>
@@ -435,7 +435,7 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
             <div className="bg-blue-50 p-4 rounded-lg">
               <h4 className="font-medium text-blue-900 mb-2">🔄 If Text is Wrong</h4>
               <ul className="text-sm text-blue-700 space-y-1">
-                <li>• Click "Regenerate" for new attempt</li>
+                <li>• Click &quot;Regenerate&quot; for new attempt</li>
                 <li>• Try simpler title words</li>
                 <li>• Remove special characters</li>
                 <li>• Use common, easy-to-spell words</li>
