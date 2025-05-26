@@ -351,7 +351,9 @@ GENERATE BOOK COVER WITH THIS EXACT FORMAT AND PERFECT TEXT ACCURACY.`;
                   <>
                     <Sparkles className="w-5 h-5" />
                     Generate Book Cover
-                  </button>
+                  </>
+                )}
+              </button>
             </div>
           </div>
 
