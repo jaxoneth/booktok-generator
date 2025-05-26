@@ -49,30 +49,46 @@ const BookCoverGenerator = () => {
     setShowResult(false);
 
     try {
-      const prompt = `Create a professional book cover design with these EXACT specifications:
+      const prompt = `You are creating a book cover. Follow these instructions EXACTLY:
 
-TITLE TEXT (copy exactly letter-by-letter): "${formData.title}"
-AUTHOR TEXT (copy exactly letter-by-letter): ${formData.author || '[Author Name]'}
+STEP 1: TEXT TRANSCRIPTION (CRITICAL)
+Title to display: "${formData.title}"
+Author to display: ${formData.author || '[Author Name]'}
+
+STEP 2: TEXT RULES (MANDATORY)
+- Copy the title LETTER BY LETTER exactly as shown: ${formData.title.split('').join(' - ')}
+- Copy the author LETTER BY LETTER exactly as shown: ${(formData.author || '[Author Name]').split('').join(' - ')}
+- DO NOT modify, add, remove, or change ANY single character
+- DO NOT add decorative elements to letters
+- DO NOT use stylized fonts that alter letter shapes
+- Use ONLY standard, clean typography
+- ZERO tolerance for text changes
+
+STEP 3: VISUAL DESIGN
 Genre: ${formData.genre}
 ${formData.mood ? `Mood: ${formData.mood}` : ''}
 ${formData.colors ? `Colors: ${formData.colors}` : ''}
 ${formData.style ? `Art Style: ${formData.style}` : ''}
 ${formData.elements ? `Visual Elements: ${formData.elements}` : ''}
 
-CRITICAL TEXT REQUIREMENTS:
-- NEVER add, remove, or change ANY letters in the title or author name
-- NEVER add extra characters, symbols, or decorative elements to text
-- Title must be spelled EXACTLY: "${formData.title}" (character-for-character perfect)
-- Author must be spelled EXACTLY: ${formData.author || '[Author Name]'} (character-for-character perfect)
-- Use clean, simple, readable fonts without decorative alterations
-- Text must be HORIZONTAL and RIGHT-SIDE UP (never mirrored, rotated, or backwards)
-- High contrast between text and background for perfect readability
-- Book cover dimensions: EXACTLY 6:9 aspect ratio (portrait orientation)
-- Title at TOP of cover, author at BOTTOM
-- Professional typography layout
-- NO fancy text effects that could distort letters
-- NO additional text beyond title and author name
-- Focus on accurate letter reproduction over decorative fonts`;
+STEP 4: TECHNICAL SPECIFICATIONS
+- Format: 6:9 aspect ratio book cover
+- Title placement: Top third of cover
+- Author placement: Bottom of cover
+- Text orientation: Horizontal only
+- Font style: Simple, sans-serif, high readability
+- Text color: High contrast with background
+- NO text effects, shadows, or distortions
+
+STEP 5: QUALITY CONTROL
+Before finalizing, verify:
+✓ Title matches EXACTLY: "${formData.title}"
+✓ Author matches EXACTLY: ${formData.author || '[Author Name]'}
+✓ No extra letters, symbols, or characters
+✓ No missing letters
+✓ Text is perfectly horizontal and readable
+
+Generate the book cover following ALL steps above.`;
 
       const response = await fetch('/api/generate-cover', {
         method: 'POST',
@@ -164,6 +180,7 @@ CRITICAL TEXT REQUIREMENTS:
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   placeholder="Enter your book title"
                 />
+                <p className="text-xs text-gray-500 mt-1">Keep titles simple for best text accuracy</p>
               </div>
 
               <div>
@@ -178,6 +195,7 @@ CRITICAL TEXT REQUIREMENTS:
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   placeholder="Author name"
                 />
+                <p className="text-xs text-gray-500 mt-1">Avoid special characters for best results</p>
               </div>
 
               <div>
@@ -350,8 +368,8 @@ CRITICAL TEXT REQUIREMENTS:
           <h3 className="text-xl font-semibold text-gray-800 mb-6">Pro Tips for Better Book Covers</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-purple-50 p-4 rounded-lg">
-              <h4 className="font-medium text-purple-900 mb-2">Genre Conventions</h4>
-              <p className="text-sm text-purple-700">Different genres have visual expectations. Romance often uses soft colors and couples, while thrillers use dark, bold imagery.</p>
+              <h4 className="font-medium text-purple-900 mb-2">Text Accuracy Tips</h4>
+              <p className="text-sm text-purple-700">Keep titles under 4 words and avoid special characters. Simple titles like &quot;The Magic Book&quot; work best for accurate text generation.</p>
             </div>
             <div className="bg-blue-50 p-4 rounded-lg">
               <h4 className="font-medium text-blue-900 mb-2">Typography Matters</h4>
