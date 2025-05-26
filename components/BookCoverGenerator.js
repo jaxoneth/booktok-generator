@@ -52,7 +52,7 @@ const BookCoverGenerator = () => {
       const titleCharacters = formData.title.split('').map((char, index) => `Position ${index + 1}: "${char}"`).join(', ');
       const authorCharacters = (formData.author || '[Author Name]').split('').map((char, index) => `Position ${index + 1}: "${char}"`).join(', ');
 
-      const prompt = `CRITICAL TEXT TRANSCRIPTION TASK - ZERO ERROR TOLERANCE
+      const prompt = `CRITICAL BOOK COVER DESIGN TASK - EXACT FORMAT REQUIRED
 
 ======= MANDATORY TEXT ANALYSIS =======
 TITLE CHARACTER MAP: ${titleCharacters}
@@ -73,40 +73,60 @@ RULE 6: Count every character - output must match input exactly
 TITLE (copy character-by-character): "${formData.title}"
 AUTHOR (copy character-by-character): ${formData.author || '[Author Name]'}
 
-VERIFICATION: Before placing text, confirm:
-- Title has exactly ${formData.title.length} characters
-- Author has exactly ${(formData.author || '[Author Name]').length} characters
-- No extra letters, no missing letters, no changed letters
+======= MANDATORY LAYOUT FORMAT =======
+Create a book cover with EXACTLY this layout:
 
-======= STRICT LAYOUT TEMPLATE =======
-TOP SECTION (20% of cover): TITLE TEXT ONLY
-- Font: Arial/Helvetica, bold, large size
-- Color: High contrast with background
-- Position: Centered horizontally, top 20% vertically
-- NO decorative elements touching the text
+DIMENSIONS: Standard book cover proportions (6:9 ratio, portrait orientation)
 
-MIDDLE SECTION (60% of cover): ARTWORK/DESIGN
-Genre: ${formData.genre}
+TOP SECTION (Upper 25% of cover):
+- Title text: "${formData.title}"
+- Font: Bold, large, serif or sans-serif
+- Color: Gold/yellow or high contrast color
+- Position: Centered horizontally, spanning multiple lines if needed
+- Text should be prominent and readable
+
+MIDDLE SECTION (50% of cover):
+- Main photographic or artistic image
+- Genre: ${formData.genre}
 ${formData.mood ? `Mood: ${formData.mood}` : ''}
 ${formData.colors ? `Colors: ${formData.colors}` : ''}
 ${formData.style ? `Art Style: ${formData.style}` : ''}
 ${formData.elements ? `Visual Elements: ${formData.elements}` : ''}
+- Image should complement the title and genre
+- Leave clear space above and below for text
 
-BOTTOM SECTION (20% of cover): AUTHOR TEXT ONLY
-- Font: Arial/Helvetica, regular weight, medium size
-- Color: High contrast with background  
-- Position: Centered horizontally, bottom 20% vertically
-- NO decorative elements touching the text
+BOTTOM SECTION (Lower 25% of cover):
+- Author name: "${formData.author || '[Author Name]'}"
+- Font: Bold, large, same style as title
+- Color: Same as title (gold/yellow or high contrast)
+- Position: Centered horizontally at bottom
+- Should be clearly readable and prominent
 
-======= FINAL QUALITY CHECK =======
-Before completion, verify these exact matches:
-✓ Title displays: "${formData.title}" (${formData.title.length} chars)
-✓ Author displays: ${formData.author || '[Author Name]'} (${(formData.author || '[Author Name]').length} chars)
-✓ Layout: Title TOP, Author BOTTOM
-✓ No extra characters anywhere in text
-✓ 6:9 portrait book cover format
+======= CRITICAL DESIGN SPECIFICATIONS =======
+- Overall format: Professional book cover
+- Text hierarchy: Title largest, author prominent at bottom
+- Background: Can extend behind text but must maintain readability
+- Typography: Clean, bold fonts - NO decorative or distorted letters
+- Contrast: High contrast between text and background
+- Quality: High resolution, print-ready appearance
+- Consistency: Same color scheme for title and author text
 
-GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
+======= FINAL VERIFICATION CHECKLIST =======
+Before completion, verify these exact requirements:
+✓ Title displays exactly: "${formData.title}" (${formData.title.length} characters)
+✓ Author displays exactly: "${formData.author || '[Author Name]'}" (${(formData.author || '[Author Name]').length} characters)
+✓ Title is at TOP of cover (upper 25%)
+✓ Author is at BOTTOM of cover (lower 25%)
+✓ Main image/artwork is in MIDDLE (50%)
+✓ Text is bold, large, and highly readable
+✓ Same color scheme for both title and author
+✓ Professional book cover appearance
+✓ 6:9 portrait book proportions
+✓ NO extra characters in text
+✓ NO missing characters in text
+✓ Text matches input EXACTLY
+
+GENERATE BOOK COVER WITH THIS EXACT FORMAT AND PERFECT TEXT ACCURACY.`;
 
       const response = await fetch('/api/generate-cover', {
         method: 'POST',
@@ -201,7 +221,7 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
                 <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                   <p className="text-xs text-blue-800 font-medium">📝 Text Accuracy Tips:</p>
                   <ul className="text-xs text-blue-700 mt-1 space-y-1">
-                    <li>• Keep titles 1-4 words for best results</li>
+                    <li>• Keep titles 1-8 words for best results</li>
                     <li>• Avoid apostrophes, quotes, or special symbols</li>
                     <li>• Use simple words (avoid complex spellings)</li>
                     <li>• Example: &quot;The Magic Book&quot; works better than &quot;The Wizard&apos;s Journey&quot;</li>
@@ -331,9 +351,7 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
                   <>
                     <Sparkles className="w-5 h-5" />
                     Generate Book Cover
-                  </>
-                )}
-              </button>
+                  </button>
             </div>
           </div>
 
@@ -350,13 +368,14 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
                 <p className="text-gray-400">Fill out the form and click &quot;Generate Book Cover&quot;</p>
                 
                 <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-left">
-                  <h4 className="font-medium text-yellow-800 mb-2">🎯 Layout Guarantee</h4>
-                  <p className="text-sm text-yellow-700">Every cover will have:</p>
+                  <h4 className="font-medium text-yellow-800 mb-2">🎯 Format Guarantee</h4>
+                  <p className="text-sm text-yellow-700">Every cover will have this exact layout:</p>
                   <ul className="text-sm text-yellow-700 mt-1 space-y-1">
-                    <li>📍 Title at the TOP (20% of cover)</li>
-                    <li>🎨 Artwork in the MIDDLE (60% of cover)</li>
-                    <li>✍️ Author at the BOTTOM (20% of cover)</li>
-                    <li>📏 Standard 6:9 book proportions</li>
+                    <li>📍 <strong>Title at TOP</strong> (upper 25% - large, bold text)</li>
+                    <li>🎨 <strong>Main image in MIDDLE</strong> (center 50%)</li>
+                    <li>✍️ <strong>Author at BOTTOM</strong> (lower 25% - large, bold text)</li>
+                    <li>📏 Same text color and style for title & author</li>
+                    <li>📖 Professional book cover proportions</li>
                   </ul>
                 </div>
               </div>
@@ -399,7 +418,7 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
 
                 {formData.title && (
                   <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                    <p className="text-sm text-green-800"><strong>Text Check:</strong></p>
+                    <p className="text-sm text-green-800"><strong>Text Verification:</strong></p>
                     <p className="text-sm text-green-700">Title should show: <strong>&quot;{formData.title}&quot;</strong> ({formData.title.length} characters)</p>
                     {formData.author && (
                       <p className="text-sm text-green-700">Author should show: <strong>&quot;{formData.author}&quot;</strong> ({formData.author.length} characters)</p>
@@ -412,33 +431,33 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
         </div>
 
         <div className="mt-12 bg-white rounded-2xl shadow-xl border border-purple-100 p-8">
-          <h3 className="text-xl font-semibold text-gray-800 mb-6">🎯 Perfect Text Generation Tips</h3>
+          <h3 className="text-xl font-semibold text-gray-800 mb-6">📚 Professional Book Cover Format</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-red-50 p-4 rounded-lg">
-              <h4 className="font-medium text-red-900 mb-2">❌ Avoid These</h4>
-              <ul className="text-sm text-red-700 space-y-1">
-                <li>• Apostrophes: &quot;Don&apos;t&quot;, &quot;Can&apos;t&quot;</li>
-                <li>• Special symbols: @, #, &</li>
-                <li>• Complex words with unusual spelling</li>
-                <li>• Very long titles (5+ words)</li>
+            <div className="bg-amber-50 p-4 rounded-lg">
+              <h4 className="font-medium text-amber-900 mb-2">🎯 Layout Structure</h4>
+              <ul className="text-sm text-amber-700 space-y-1">
+                <li>• Title: Upper 25% of cover</li>
+                <li>• Image: Middle 50% of cover</li>
+                <li>• Author: Lower 25% of cover</li>
+                <li>• Same bold typography for both text elements</li>
               </ul>
             </div>
             <div className="bg-green-50 p-4 rounded-lg">
-              <h4 className="font-medium text-green-900 mb-2">✅ Use These Instead</h4>
+              <h4 className="font-medium text-green-900 mb-2">✅ Best Practices</h4>
               <ul className="text-sm text-green-700 space-y-1">
-                <li>• Simple words: &quot;The Magic Book&quot;</li>
-                <li>• Common names: &quot;John Smith&quot;</li>
-                <li>• 1-4 word titles work best</li>
-                <li>• Basic letters and spaces only</li>
+                <li>• Use 2-8 word titles for best fit</li>
+                <li>• Simple author names work best</li>
+                <li>• Avoid special characters</li>
+                <li>• Gold/yellow text often works well</li>
               </ul>
             </div>
             <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="font-medium text-blue-900 mb-2">🔄 If Text is Wrong</h4>
+              <h4 className="font-medium text-blue-900 mb-2">🔄 Consistency</h4>
               <ul className="text-sm text-blue-700 space-y-1">
-                <li>• Click &quot;Regenerate&quot; for new attempt</li>
-                <li>• Try simpler title words</li>
-                <li>• Remove special characters</li>
-                <li>• Use common, easy-to-spell words</li>
+                <li>• All covers use same format</li>
+                <li>• Predictable text placement</li>
+                <li>• Professional appearance</li>
+                <li>• High readability guaranteed</li>
               </ul>
             </div>
           </div>
@@ -447,3 +466,5 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
     </div>
   );
 };
+
+export default BookCoverGenerator;
