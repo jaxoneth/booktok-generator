@@ -49,35 +49,25 @@ const BookCoverGenerator = () => {
     setShowResult(false);
 
     try {
-      const prompt = `Create a single flat book cover design:
+      const prompt = `Create a book cover:
 
-EXACT TEXT REQUIREMENTS - ZERO TOLERANCE FOR CHANGES:
-Title must be EXACTLY: "${formData.title}" 
-Author must be EXACTLY: "${formData.author || '[Author Name]'}"
-
-DO NOT ADD ANY EXTRA LETTERS TO THE TITLE OR AUTHOR NAME
-DO NOT REMOVE ANY LETTERS FROM THE TITLE OR AUTHOR NAME
-DO NOT CHANGE ANY LETTERS IN THE TITLE OR AUTHOR NAME
-
-LAYOUT REQUIREMENTS:
-- SINGLE flat book cover only (NO 3D effects, NO multiple books)
-- Portrait orientation (6:9 ratio)
-- Title at TOP (25% of cover) - large, bold, gold/yellow text
-- Main artwork in MIDDLE (50% of cover)
-- Author at BOTTOM (25% of cover) - large, bold, same color as title
-
-GENRE & STYLE:
+Title: "${formData.title}" (spell exactly)
+Author: "${formData.author || '[Author Name]'}" (spell exactly)
 Genre: ${formData.genre}
-${formData.mood ? `Mood: ${formData.mood}` : ''}
+
+Layout: Single flat book cover, portrait format
+- Title at top (large bold text)
+- Artwork in middle 
+- Author at bottom (large bold text)
+- Same color for title and author text
+
+IMPORTANT: Use the exact spelling provided. Do not add, remove, or change any letters in the title or author name.
+
+${formData.mood ? `Style: ${formData.mood}` : ''}
 ${formData.colors ? `Colors: ${formData.colors}` : ''}
-${formData.style ? `Art Style: ${formData.style}` : ''}
-${formData.elements ? `Visual Elements: ${formData.elements}` : ''}
+${formData.style ? `Art: ${formData.style}` : ''}`;
 
-FINAL CHECK BEFORE COMPLETING:
-Verify title shows exactly "${formData.title}" with no extra or missing letters
-Verify author shows exactly "${formData.author || '[Author Name]'}" with no extra or missing letters
-
-Create a professional book cover with PERFECT text accuracy.`;
+      console.log('Sending prompt:', prompt); // Debug log
 
       const response = await fetch('/api/generate-cover', {
         method: 'POST',
@@ -172,7 +162,7 @@ Create a professional book cover with PERFECT text accuracy.`;
                 <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                   <p className="text-xs text-blue-800 font-medium">📝 Text Accuracy Tips:</p>
                   <ul className="text-xs text-blue-700 mt-1 space-y-1">
-                    <li>• Keep titles 1-8 words for best results</li>
+                    <li>• Keep titles 1-6 words for best results</li>
                     <li>• Avoid apostrophes, quotes, or special symbols</li>
                     <li>• Use simple words (avoid complex spellings)</li>
                     <li>• Example: &quot;The Magic Book&quot; works better than &quot;The Wizard&apos;s Journey&quot;</li>
@@ -324,9 +314,9 @@ Create a professional book cover with PERFECT text accuracy.`;
                   <h4 className="font-medium text-yellow-800 mb-2">🎯 Format Guarantee</h4>
                   <p className="text-sm text-yellow-700">Every cover will have this exact layout:</p>
                   <ul className="text-sm text-yellow-700 mt-1 space-y-1">
-                    <li>📍 <strong>Title at TOP</strong> (upper 25% - large, bold text)</li>
-                    <li>🎨 <strong>Main image in MIDDLE</strong> (center 50%)</li>
-                    <li>✍️ <strong>Author at BOTTOM</strong> (lower 25% - large, bold text)</li>
+                    <li>📍 <strong>Title at TOP</strong> (large, bold text)</li>
+                    <li>🎨 <strong>Main image in MIDDLE</strong> (center artwork)</li>
+                    <li>✍️ <strong>Author at BOTTOM</strong> (large, bold text)</li>
                     <li>📏 Same text color and style for title & author</li>
                     <li>📖 Single flat book cover (no 3D effects)</li>
                   </ul>
@@ -384,33 +374,33 @@ Create a professional book cover with PERFECT text accuracy.`;
         </div>
 
         <div className="mt-12 bg-white rounded-2xl shadow-xl border border-purple-100 p-8">
-          <h3 className="text-xl font-semibold text-gray-800 mb-6">🛡️ Enhanced Text Protection System</h3>
+          <h3 className="text-xl font-semibold text-gray-800 mb-6">⚡ Optimized Generation System</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-red-50 p-4 rounded-lg">
-              <h4 className="font-medium text-red-900 mb-2">🚫 Zero Tolerance Policy</h4>
-              <ul className="text-sm text-red-700 space-y-1">
-                <li>• NO extra letters (prevents &quot;GIIRL&quot; from &quot;GIRL&quot;)</li>
-                <li>• NO missing letters</li>
-                <li>• NO changed letters</li>
-                <li>• Multiple verification checks</li>
-              </ul>
-            </div>
             <div className="bg-green-50 p-4 rounded-lg">
-              <h4 className="font-medium text-green-900 mb-2">✅ Perfect Accuracy</h4>
+              <h4 className="font-medium text-green-900 mb-2">🎯 Text Accuracy</h4>
               <ul className="text-sm text-green-700 space-y-1">
-                <li>• Title: Upper 25% of cover</li>
-                <li>• Author: Lower 25% of cover</li>
-                <li>• Single flat book format</li>
-                <li>• Professional appearance</li>
+                <li>• Exact spelling enforcement</li>
+                <li>• No extra or missing letters</li>
+                <li>• Simple, clean fonts</li>
+                <li>• Consistent text placement</li>
               </ul>
             </div>
             <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="font-medium text-blue-900 mb-2">🔧 Best Results</h4>
+              <h4 className="font-medium text-blue-900 mb-2">📱 Fast Generation</h4>
               <ul className="text-sm text-blue-700 space-y-1">
-                <li>• Use simple, common words</li>
-                <li>• Avoid special characters</li>
-                <li>• 2-6 word titles work best</li>
-                <li>• Click regenerate if text is wrong</li>
+                <li>• Optimized for speed</li>
+                <li>• Reduced timeout issues</li>
+                <li>• Reliable processing</li>
+                <li>• Quick regeneration</li>
+              </ul>
+            </div>
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <h4 className="font-medium text-purple-900 mb-2">🎨 Professional Quality</h4>
+              <ul className="text-sm text-purple-700 space-y-1">
+                <li>• Single flat book format</li>
+                <li>• Consistent layout structure</li>
+                <li>• High-quality artwork</li>
+                <li>• Genre-appropriate styling</li>
               </ul>
             </div>
           </div>
