@@ -49,15 +49,28 @@ const BookCoverGenerator = () => {
     setShowResult(false);
 
     try {
-      const prompt = `Create a professional book cover design for "${formData.title}" by ${formData.author || '[Author Name]'}. 
+      const prompt = `Create a professional book cover design with these EXACT specifications:
 
+TITLE (spell exactly): "${formData.title}"
+AUTHOR (spell exactly): ${formData.author || '[Author Name]'}
 Genre: ${formData.genre}
 ${formData.mood ? `Mood: ${formData.mood}` : ''}
 ${formData.colors ? `Colors: ${formData.colors}` : ''}
 ${formData.style ? `Art Style: ${formData.style}` : ''}
 ${formData.elements ? `Visual Elements: ${formData.elements}` : ''}
 
-Requirements: High-quality book cover design, professional typography, readable title and author name, ${formData.genre.toLowerCase()} genre appropriate, eye-catching composition, suitable for both print and digital, book cover proportions (6:9 aspect ratio).`;
+CRITICAL REQUIREMENTS:
+- Book cover dimensions: EXACTLY 6:9 aspect ratio (portrait orientation)
+- Title text: Large, bold, readable font at TOP of cover
+- Author name: Smaller text at BOTTOM of cover
+- Text must be HORIZONTAL and RIGHT-SIDE UP (not mirrored or rotated)
+- Text must be spelled EXACTLY as written above
+- Use clear, high-contrast typography that stands out
+- Professional book cover layout with proper text hierarchy
+- Text should be overlaid clearly on the background
+- Ensure text is NOT backwards, mirrored, or upside down
+- Make text large enough to read at thumbnail size
+- Use standard book cover typography conventions`;
 
       const response = await fetch('/api/generate-cover', {
         method: 'POST',
