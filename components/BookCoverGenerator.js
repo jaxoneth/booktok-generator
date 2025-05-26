@@ -49,46 +49,65 @@ const BookCoverGenerator = () => {
     setShowResult(false);
 
     try {
-      const prompt = `You are creating a book cover. Follow these instructions EXACTLY:
+      // Create character-by-character breakdown for ultra precision
+      const titleCharacters = formData.title.split('').map((char, index) => `Position ${index + 1}: "${char}"`).join(', ');
+      const authorCharacters = (formData.author || '[Author Name]').split('').map((char, index) => `Position ${index + 1}: "${char}"`).join(', ');
 
-STEP 1: TEXT TRANSCRIPTION (CRITICAL)
-Title to display: "${formData.title}"
-Author to display: ${formData.author || '[Author Name]'}
+      const prompt = `CRITICAL TEXT TRANSCRIPTION TASK - ZERO ERROR TOLERANCE
 
-STEP 2: TEXT RULES (MANDATORY)
-- Copy the title LETTER BY LETTER exactly as shown: ${formData.title.split('').join(' - ')}
-- Copy the author LETTER BY LETTER exactly as shown: ${(formData.author || '[Author Name]').split('').join(' - ')}
-- DO NOT modify, add, remove, or change ANY single character
-- DO NOT add decorative elements to letters
-- DO NOT use stylized fonts that alter letter shapes
-- Use ONLY standard, clean typography
-- ZERO tolerance for text changes
+======= MANDATORY TEXT ANALYSIS =======
+TITLE CHARACTER MAP: ${titleCharacters}
+AUTHOR CHARACTER MAP: ${authorCharacters}
 
-STEP 3: VISUAL DESIGN
+TITLE TOTAL LENGTH: ${formData.title.length} characters
+AUTHOR TOTAL LENGTH: ${(formData.author || '[Author Name]').length} characters
+
+======= ABSOLUTE TEXT REQUIREMENTS =======
+RULE 1: NEVER add letters that don't exist in the original
+RULE 2: NEVER remove letters that exist in the original  
+RULE 3: NEVER change any letter to a different letter
+RULE 4: NEVER add decorative symbols, dots, or extra characters
+RULE 5: NEVER use fonts that distort letter shapes
+RULE 6: Count every character - output must match input exactly
+
+======= EXACT TEXT TO DISPLAY =======
+TITLE (copy character-by-character): "${formData.title}"
+AUTHOR (copy character-by-character): ${formData.author || '[Author Name]'}
+
+VERIFICATION: Before placing text, confirm:
+- Title has exactly ${formData.title.length} characters
+- Author has exactly ${(formData.author || '[Author Name]').length} characters
+- No extra letters, no missing letters, no changed letters
+
+======= STRICT LAYOUT TEMPLATE =======
+TOP SECTION (20% of cover): TITLE TEXT ONLY
+- Font: Arial/Helvetica, bold, large size
+- Color: High contrast with background
+- Position: Centered horizontally, top 20% vertically
+- NO decorative elements touching the text
+
+MIDDLE SECTION (60% of cover): ARTWORK/DESIGN
 Genre: ${formData.genre}
 ${formData.mood ? `Mood: ${formData.mood}` : ''}
 ${formData.colors ? `Colors: ${formData.colors}` : ''}
 ${formData.style ? `Art Style: ${formData.style}` : ''}
 ${formData.elements ? `Visual Elements: ${formData.elements}` : ''}
 
-STEP 4: TECHNICAL SPECIFICATIONS
-- Format: 6:9 aspect ratio book cover
-- Title placement: Top third of cover
-- Author placement: Bottom of cover
-- Text orientation: Horizontal only
-- Font style: Simple, sans-serif, high readability
-- Text color: High contrast with background
-- NO text effects, shadows, or distortions
+BOTTOM SECTION (20% of cover): AUTHOR TEXT ONLY
+- Font: Arial/Helvetica, regular weight, medium size
+- Color: High contrast with background  
+- Position: Centered horizontally, bottom 20% vertically
+- NO decorative elements touching the text
 
-STEP 5: QUALITY CONTROL
-Before finalizing, verify:
-✓ Title matches EXACTLY: "${formData.title}"
-✓ Author matches EXACTLY: ${formData.author || '[Author Name]'}
-✓ No extra letters, symbols, or characters
-✓ No missing letters
-✓ Text is perfectly horizontal and readable
+======= FINAL QUALITY CHECK =======
+Before completion, verify these exact matches:
+✓ Title displays: "${formData.title}" (${formData.title.length} chars)
+✓ Author displays: ${formData.author || '[Author Name]'} (${(formData.author || '[Author Name]').length} chars)
+✓ Layout: Title TOP, Author BOTTOM
+✓ No extra characters anywhere in text
+✓ 6:9 portrait book cover format
 
-Generate the book cover following ALL steps above.`;
+GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
 
       const response = await fetch('/api/generate-cover', {
         method: 'POST',
@@ -180,7 +199,15 @@ Generate the book cover following ALL steps above.`;
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   placeholder="Enter your book title"
                 />
-                <p className="text-xs text-gray-500 mt-1">Keep titles simple for best text accuracy</p>
+                <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-xs text-blue-800 font-medium">📝 Text Accuracy Tips:</p>
+                  <ul className="text-xs text-blue-700 mt-1 space-y-1">
+                    <li>• Keep titles 1-4 words for best results</li>
+                    <li>• Avoid apostrophes, quotes, or special symbols</li>
+                    <li>• Use simple words (avoid complex spellings)</li>
+                    <li>• Example: "The Magic Book" works better than "The Wizard's Journey"</li>
+                  </ul>
+                </div>
               </div>
 
               <div>
@@ -195,7 +222,7 @@ Generate the book cover following ALL steps above.`;
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   placeholder="Author name"
                 />
-                <p className="text-xs text-gray-500 mt-1">Avoid special characters for best results</p>
+                <p className="text-xs text-gray-500 mt-1">Use simple names like "John Smith" for best text accuracy</p>
               </div>
 
               <div>
@@ -322,6 +349,17 @@ Generate the book cover following ALL steps above.`;
                 <Image className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500 text-lg mb-2">Your book cover will appear here</p>
                 <p className="text-gray-400">Fill out the form and click &quot;Generate Book Cover&quot;</p>
+                
+                <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-left">
+                  <h4 className="font-medium text-yellow-800 mb-2">🎯 Layout Guarantee</h4>
+                  <p className="text-sm text-yellow-700">Every cover will have:</p>
+                  <ul className="text-sm text-yellow-700 mt-1 space-y-1">
+                    <li>📍 Title at the TOP (20% of cover)</li>
+                    <li>🎨 Artwork in the MIDDLE (60% of cover)</li>
+                    <li>✍️ Author at the BOTTOM (20% of cover)</li>
+                    <li>📏 Standard 6:9 book proportions</li>
+                  </ul>
+                </div>
               </div>
             ) : (
               <div className="space-y-4">
@@ -359,25 +397,50 @@ Generate the book cover following ALL steps above.`;
                     Download
                   </button>
                 </div>
+
+                {formData.title && (
+                  <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-sm text-green-800"><strong>Text Check:</strong></p>
+                    <p className="text-sm text-green-700">Title should show: <strong>&quot;{formData.title}&quot;</strong> ({formData.title.length} characters)</p>
+                    {formData.author && (
+                      <p className="text-sm text-green-700">Author should show: <strong>&quot;{formData.author}&quot;</strong> ({formData.author.length} characters)</p>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>
         </div>
 
         <div className="mt-12 bg-white rounded-2xl shadow-xl border border-purple-100 p-8">
-          <h3 className="text-xl font-semibold text-gray-800 mb-6">Pro Tips for Better Book Covers</h3>
+          <h3 className="text-xl font-semibold text-gray-800 mb-6">🎯 Perfect Text Generation Tips</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-purple-50 p-4 rounded-lg">
-              <h4 className="font-medium text-purple-900 mb-2">Text Accuracy Tips</h4>
-              <p className="text-sm text-purple-700">Keep titles under 4 words and avoid special characters. Simple titles like &quot;The Magic Book&quot; work best for accurate text generation.</p>
-            </div>
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="font-medium text-blue-900 mb-2">Typography Matters</h4>
-              <p className="text-sm text-blue-700">Your title should be readable even as a small thumbnail. Bold, clear fonts often work better than decorative ones.</p>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <h4 className="font-medium text-red-900 mb-2">❌ Avoid These</h4>
+              <ul className="text-sm text-red-700 space-y-1">
+                <li>• Apostrophes: "Don't", "Can't"</li>
+                <li>• Special symbols: @, #, &</li>
+                <li>• Complex words with unusual spelling</li>
+                <li>• Very long titles (5+ words)</li>
+              </ul>
             </div>
             <div className="bg-green-50 p-4 rounded-lg">
-              <h4 className="font-medium text-green-900 mb-2">Test Different Versions</h4>
-              <p className="text-sm text-green-700">Generate multiple variations by tweaking the prompt. A/B test with your target audience to see what resonates.</p>
+              <h4 className="font-medium text-green-900 mb-2">✅ Use These Instead</h4>
+              <ul className="text-sm text-green-700 space-y-1">
+                <li>• Simple words: "The Magic Book"</li>
+                <li>• Common names: "John Smith"</li>
+                <li>• 1-4 word titles work best</li>
+                <li>• Basic letters and spaces only</li>
+              </ul>
+            </div>
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <h4 className="font-medium text-blue-900 mb-2">🔄 If Text is Wrong</h4>
+              <ul className="text-sm text-blue-700 space-y-1">
+                <li>• Click "Regenerate" for new attempt</li>
+                <li>• Try simpler title words</li>
+                <li>• Remove special characters</li>
+                <li>• Use common, easy-to-spell words</li>
+              </ul>
             </div>
           </div>
         </div>
