@@ -49,7 +49,6 @@ const BookCoverGenerator = () => {
     setShowResult(false);
 
     try {
-      // Create character-by-character breakdown for ultra precision
       const titleCharacters = formData.title.split('').map((char, index) => `Position ${index + 1}: "${char}"`).join(', ');
       const authorCharacters = (formData.author || '[Author Name]').split('').map((char, index) => `Position ${index + 1}: "${char}"`).join(', ');
 
@@ -448,5 +447,3 @@ GENERATE COVER WITH PERFECT TEXT ACCURACY.`;
     </div>
   );
 };
-
-export default BookCoverGenerator;
