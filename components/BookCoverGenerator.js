@@ -51,8 +51,13 @@ const BookCoverGenerator = () => {
     try {
       const prompt = `Create a single flat book cover design:
 
-TITLE: "${formData.title}" (must be spelled exactly as written)
-AUTHOR: "${formData.author || '[Author Name]'}" (must be spelled exactly as written)
+EXACT TEXT REQUIREMENTS - ZERO TOLERANCE FOR CHANGES:
+Title must be EXACTLY: "${formData.title}" 
+Author must be EXACTLY: "${formData.author || '[Author Name]'}"
+
+DO NOT ADD ANY EXTRA LETTERS TO THE TITLE OR AUTHOR NAME
+DO NOT REMOVE ANY LETTERS FROM THE TITLE OR AUTHOR NAME
+DO NOT CHANGE ANY LETTERS IN THE TITLE OR AUTHOR NAME
 
 LAYOUT REQUIREMENTS:
 - SINGLE flat book cover only (NO 3D effects, NO multiple books)
@@ -68,14 +73,11 @@ ${formData.colors ? `Colors: ${formData.colors}` : ''}
 ${formData.style ? `Art Style: ${formData.style}` : ''}
 ${formData.elements ? `Visual Elements: ${formData.elements}` : ''}
 
-CRITICAL TEXT RULES:
-- Copy title exactly letter-by-letter: "${formData.title}"
-- Copy author exactly letter-by-letter: "${formData.author || '[Author Name]'}"
-- NO extra letters, NO missing letters, NO changed letters
-- Use clean, readable fonts
-- High contrast text
+FINAL CHECK BEFORE COMPLETING:
+Verify title shows exactly "${formData.title}" with no extra or missing letters
+Verify author shows exactly "${formData.author || '[Author Name]'}" with no extra or missing letters
 
-Create a professional book cover with perfect text accuracy and consistent layout.`;
+Create a professional book cover with PERFECT text accuracy.`;
 
       const response = await fetch('/api/generate-cover', {
         method: 'POST',
@@ -382,33 +384,33 @@ Create a professional book cover with perfect text accuracy and consistent layou
         </div>
 
         <div className="mt-12 bg-white rounded-2xl shadow-xl border border-purple-100 p-8">
-          <h3 className="text-xl font-semibold text-gray-800 mb-6">📚 Professional Book Cover Format</h3>
+          <h3 className="text-xl font-semibold text-gray-800 mb-6">🛡️ Enhanced Text Protection System</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-amber-50 p-4 rounded-lg">
-              <h4 className="font-medium text-amber-900 mb-2">🎯 Layout Structure</h4>
-              <ul className="text-sm text-amber-700 space-y-1">
-                <li>• Title: Upper 25% of cover</li>
-                <li>• Image: Middle 50% of cover</li>
-                <li>• Author: Lower 25% of cover</li>
-                <li>• Single flat book format only</li>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <h4 className="font-medium text-red-900 mb-2">🚫 Zero Tolerance Policy</h4>
+              <ul className="text-sm text-red-700 space-y-1">
+                <li>• NO extra letters (prevents &quot;GIIRL&quot; from &quot;GIRL&quot;)</li>
+                <li>• NO missing letters</li>
+                <li>• NO changed letters</li>
+                <li>• Multiple verification checks</li>
               </ul>
             </div>
             <div className="bg-green-50 p-4 rounded-lg">
-              <h4 className="font-medium text-green-900 mb-2">✅ Best Practices</h4>
+              <h4 className="font-medium text-green-900 mb-2">✅ Perfect Accuracy</h4>
               <ul className="text-sm text-green-700 space-y-1">
-                <li>• Use 2-8 word titles for best fit</li>
-                <li>• Simple author names work best</li>
-                <li>• Avoid special characters</li>
-                <li>• Gold/yellow text often works well</li>
+                <li>• Title: Upper 25% of cover</li>
+                <li>• Author: Lower 25% of cover</li>
+                <li>• Single flat book format</li>
+                <li>• Professional appearance</li>
               </ul>
             </div>
             <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="font-medium text-blue-900 mb-2">🔄 Consistency</h4>
+              <h4 className="font-medium text-blue-900 mb-2">🔧 Best Results</h4>
               <ul className="text-sm text-blue-700 space-y-1">
-                <li>• All covers use same format</li>
-                <li>• Predictable text placement</li>
-                <li>• Professional appearance</li>
-                <li>• High readability guaranteed</li>
+                <li>• Use simple, common words</li>
+                <li>• Avoid special characters</li>
+                <li>• 2-6 word titles work best</li>
+                <li>• Click regenerate if text is wrong</li>
               </ul>
             </div>
           </div>
