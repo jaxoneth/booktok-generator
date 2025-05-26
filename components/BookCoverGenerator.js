@@ -49,25 +49,28 @@ const BookCoverGenerator = () => {
     setShowResult(false);
 
     try {
-      const prompt = `Create a book cover:
+      const prompt = `Turn the concept into a feasible and interesting book title and tagline first. Then create a photorealistic book cover featuring a dramatic or comedic moment between characters, styled like a modern ${formData.genre.toLowerCase()} cover.
 
-Title: "${formData.title}" (spell exactly)
-Author: "${formData.author || '[Author Name]'}" (spell exactly)
+Title: "${formData.title}" (spell exactly as written)
+Author: "${formData.author || '[Author Name]'}" (spell exactly as written)
 Genre: ${formData.genre}
 
-Layout: Single flat book cover, portrait format
-- Title at top (large bold text)
-- Artwork in middle 
-- Author at bottom (large bold text)
-- Same color for title and author text
+CRITICAL: Use the exact spelling provided for title and author. Do not add, remove, or change any letters.
 
-IMPORTANT: Use the exact spelling provided. Do not add, remove, or change any letters in the title or author name.
+Design Requirements:
+- Bold serif title text across the top: "${formData.title}"
+- Author name at the bottom: "${formData.author || '[Author Name]'}"
+- Single flat book cover, portrait format
+- The scene should reflect the storyline described in the title
+- ${formData.mood ? `Mood: ${formData.mood}, ` : ''}warm, soft lighting, expressive faces, cinematic realism
+- The image should look like a photograph taken for a book cover, with slight drama and emotional tension
+- ${formData.colors ? `Use ${formData.colors} colors` : 'Use muted or emotionally resonant colors'} to match the theme
+- ${formData.elements ? `Background elements: ${formData.elements}` : 'Background elements should enhance the story without clutter'}
+- ${formData.style ? `Art style: ${formData.style}` : 'Photorealistic style'}
 
-${formData.mood ? `Style: ${formData.mood}` : ''}
-${formData.colors ? `Colors: ${formData.colors}` : ''}
-${formData.style ? `Art: ${formData.style}` : ''}`;
+Create a professional book cover that looks like it could be sold in stores.`;
 
-      console.log('Sending prompt:', prompt); // Debug log
+      console.log('Sending prompt:', prompt);
 
       const response = await fetch('/api/generate-cover', {
         method: 'POST',
@@ -311,14 +314,14 @@ ${formData.style ? `Art: ${formData.style}` : ''}`;
                 <p className="text-gray-400">Fill out the form and click &quot;Generate Book Cover&quot;</p>
                 
                 <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-left">
-                  <h4 className="font-medium text-yellow-800 mb-2">🎯 Format Guarantee</h4>
-                  <p className="text-sm text-yellow-700">Every cover will have this exact layout:</p>
+                  <h4 className="font-medium text-yellow-800 mb-2">🎯 Professional Quality</h4>
+                  <p className="text-sm text-yellow-700">Every cover will feature:</p>
                   <ul className="text-sm text-yellow-700 mt-1 space-y-1">
-                    <li>📍 <strong>Title at TOP</strong> (large, bold text)</li>
-                    <li>🎨 <strong>Main image in MIDDLE</strong> (center artwork)</li>
-                    <li>✍️ <strong>Author at BOTTOM</strong> (large, bold text)</li>
-                    <li>📏 Same text color and style for title & author</li>
-                    <li>📖 Single flat book cover (no 3D effects)</li>
+                    <li>📍 <strong>Bold serif title at TOP</strong> (professional typography)</li>
+                    <li>🎭 <strong>Dramatic/comedic scene in MIDDLE</strong> (cinematic realism)</li>
+                    <li>✍️ <strong>Author name at BOTTOM</strong> (clear, readable)</li>
+                    <li>📸 <strong>Photorealistic quality</strong> (store-ready appearance)</li>
+                    <li>🎨 <strong>Genre-appropriate styling</strong> (emotional resonance)</li>
                   </ul>
                 </div>
               </div>
@@ -374,33 +377,33 @@ ${formData.style ? `Art: ${formData.style}` : ''}`;
         </div>
 
         <div className="mt-12 bg-white rounded-2xl shadow-xl border border-purple-100 p-8">
-          <h3 className="text-xl font-semibold text-gray-800 mb-6">⚡ Optimized Generation System</h3>
+          <h3 className="text-xl font-semibold text-gray-800 mb-6">📚 Professional Book Cover System</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-green-50 p-4 rounded-lg">
-              <h4 className="font-medium text-green-900 mb-2">🎯 Text Accuracy</h4>
-              <ul className="text-sm text-green-700 space-y-1">
-                <li>• Exact spelling enforcement</li>
-                <li>• No extra or missing letters</li>
-                <li>• Simple, clean fonts</li>
-                <li>• Consistent text placement</li>
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <h4 className="font-medium text-blue-900 mb-2">🎨 Photorealistic Quality</h4>
+              <ul className="text-sm text-blue-700 space-y-1">
+                <li>• Cinematic realism and lighting</li>
+                <li>• Expressive character faces</li>
+                <li>• Dramatic or comedic moments</li>
+                <li>• Store-quality appearance</li>
               </ul>
             </div>
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="font-medium text-blue-900 mb-2">📱 Fast Generation</h4>
-              <ul className="text-sm text-blue-700 space-y-1">
-                <li>• Optimized for speed</li>
-                <li>• Reduced timeout issues</li>
-                <li>• Reliable processing</li>
-                <li>• Quick regeneration</li>
+            <div className="bg-green-50 p-4 rounded-lg">
+              <h4 className="font-medium text-green-900 mb-2">📖 Genre-Appropriate</h4>
+              <ul className="text-sm text-green-700 space-y-1">
+                <li>• Styled for specific genres</li>
+                <li>• Emotionally resonant colors</li>
+                <li>• Story-enhancing backgrounds</li>
+                <li>• Professional typography</li>
               </ul>
             </div>
             <div className="bg-purple-50 p-4 rounded-lg">
-              <h4 className="font-medium text-purple-900 mb-2">🎨 Professional Quality</h4>
+              <h4 className="font-medium text-purple-900 mb-2">🛡️ Text Protection</h4>
               <ul className="text-sm text-purple-700 space-y-1">
-                <li>• Single flat book format</li>
-                <li>• Consistent layout structure</li>
-                <li>• High-quality artwork</li>
-                <li>• Genre-appropriate styling</li>
+                <li>• Exact spelling enforcement</li>
+                <li>• Bold serif title positioning</li>
+                <li>• Clear author name placement</li>
+                <li>• Professional text hierarchy</li>
               </ul>
             </div>
           </div>
