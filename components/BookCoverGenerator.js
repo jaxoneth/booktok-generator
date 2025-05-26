@@ -52,7 +52,7 @@ const BookCoverGenerator = () => {
       const titleCharacters = formData.title.split('').map((char, index) => `Position ${index + 1}: "${char}"`).join(', ');
       const authorCharacters = (formData.author || '[Author Name]').split('').map((char, index) => `Position ${index + 1}: "${char}"`).join(', ');
 
-      const prompt = `CRITICAL BOOK COVER DESIGN TASK - EXACT FORMAT REQUIRED
+      const prompt = `CRITICAL SINGLE BOOK COVER DESIGN TASK - EXACT FORMAT REQUIRED
 
 ======= MANDATORY TEXT ANALYSIS =======
 TITLE CHARACTER MAP: ${titleCharacters}
@@ -73,20 +73,23 @@ RULE 6: Count every character - output must match input exactly
 TITLE (copy character-by-character): "${formData.title}"
 AUTHOR (copy character-by-character): ${formData.author || '[Author Name]'}
 
-======= MANDATORY LAYOUT FORMAT =======
-Create a book cover with EXACTLY this layout:
+======= MANDATORY SINGLE BOOK COVER FORMAT =======
+Create a SINGLE, FLAT book cover design with EXACTLY this layout:
 
-DIMENSIONS: Standard book cover proportions (6:9 ratio, portrait orientation)
+CRITICAL: Show ONLY the front cover of ONE book - NO spine, NO back cover, NO 3D effects, NO multiple books
 
+DIMENSIONS: Standard book cover proportions (6:9 ratio, portrait orientation) - FLAT view only
+
+LAYOUT STRUCTURE:
 TOP SECTION (Upper 25% of cover):
 - Title text: "${formData.title}"
-- Font: Bold, large, serif or sans-serif
-- Color: Gold/yellow or high contrast color
+- Font: Bold, large, high-contrast typography
+- Color: Gold/yellow or bright contrasting color
 - Position: Centered horizontally, spanning multiple lines if needed
-- Text should be prominent and readable
+- Text must be prominent and easily readable
 
-MIDDLE SECTION (50% of cover):
-- Main photographic or artistic image
+MIDDLE SECTION (Center 50% of cover):
+- Single main photographic or artistic image
 - Genre: ${formData.genre}
 ${formData.mood ? `Mood: ${formData.mood}` : ''}
 ${formData.colors ? `Colors: ${formData.colors}` : ''}
@@ -102,17 +105,26 @@ BOTTOM SECTION (Lower 25% of cover):
 - Position: Centered horizontally at bottom
 - Should be clearly readable and prominent
 
-======= CRITICAL DESIGN SPECIFICATIONS =======
-- Overall format: Professional book cover
-- Text hierarchy: Title largest, author prominent at bottom
-- Background: Can extend behind text but must maintain readability
+======= CRITICAL PRESENTATION REQUIREMENTS =======
+- FLAT 2D book cover only - NO 3D perspective or angles
+- SINGLE book cover - NOT multiple books or spine views
+- NO background scenes with books - just the cover itself
+- NO book mockups or 3D renderings
+- Direct front-facing view only
+- Professional flat book cover design
+- Fill the entire frame with the single book cover
+
+======= DESIGN SPECIFICATIONS =======
 - Typography: Clean, bold fonts - NO decorative or distorted letters
 - Contrast: High contrast between text and background
 - Quality: High resolution, print-ready appearance
 - Consistency: Same color scheme for title and author text
+- Professional book cover appearance
+- Text must be the most prominent visual elements
 
 ======= FINAL VERIFICATION CHECKLIST =======
 Before completion, verify these exact requirements:
+✓ Shows ONLY ONE FLAT book cover (no 3D effects)
 ✓ Title displays exactly: "${formData.title}" (${formData.title.length} characters)
 ✓ Author displays exactly: "${formData.author || '[Author Name]'}" (${(formData.author || '[Author Name]').length} characters)
 ✓ Title is at TOP of cover (upper 25%)
@@ -120,13 +132,13 @@ Before completion, verify these exact requirements:
 ✓ Main image/artwork is in MIDDLE (50%)
 ✓ Text is bold, large, and highly readable
 ✓ Same color scheme for both title and author
-✓ Professional book cover appearance
 ✓ 6:9 portrait book proportions
+✓ FLAT presentation - no spine or multiple books visible
 ✓ NO extra characters in text
 ✓ NO missing characters in text
 ✓ Text matches input EXACTLY
 
-GENERATE BOOK COVER WITH THIS EXACT FORMAT AND PERFECT TEXT ACCURACY.`;
+GENERATE A SINGLE FLAT BOOK COVER WITH THIS EXACT FORMAT AND PERFECT TEXT ACCURACY.`;
 
       const response = await fetch('/api/generate-cover', {
         method: 'POST',
