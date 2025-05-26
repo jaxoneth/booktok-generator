@@ -51,26 +51,28 @@ const BookCoverGenerator = () => {
     try {
       const prompt = `Create a professional book cover design with these EXACT specifications:
 
-TITLE (spell exactly): "${formData.title}"
-AUTHOR (spell exactly): ${formData.author || '[Author Name]'}
+TITLE TEXT (copy exactly letter-by-letter): "${formData.title}"
+AUTHOR TEXT (copy exactly letter-by-letter): ${formData.author || '[Author Name]'}
 Genre: ${formData.genre}
 ${formData.mood ? `Mood: ${formData.mood}` : ''}
 ${formData.colors ? `Colors: ${formData.colors}` : ''}
 ${formData.style ? `Art Style: ${formData.style}` : ''}
 ${formData.elements ? `Visual Elements: ${formData.elements}` : ''}
 
-CRITICAL REQUIREMENTS:
+CRITICAL TEXT REQUIREMENTS:
+- NEVER add, remove, or change ANY letters in the title or author name
+- NEVER add extra characters, symbols, or decorative elements to text
+- Title must be spelled EXACTLY: "${formData.title}" (character-for-character perfect)
+- Author must be spelled EXACTLY: ${formData.author || '[Author Name]'} (character-for-character perfect)
+- Use clean, simple, readable fonts without decorative alterations
+- Text must be HORIZONTAL and RIGHT-SIDE UP (never mirrored, rotated, or backwards)
+- High contrast between text and background for perfect readability
 - Book cover dimensions: EXACTLY 6:9 aspect ratio (portrait orientation)
-- Title text: Large, bold, readable font at TOP of cover
-- Author name: Smaller text at BOTTOM of cover
-- Text must be HORIZONTAL and RIGHT-SIDE UP (not mirrored or rotated)
-- Text must be spelled EXACTLY as written above
-- Use clear, high-contrast typography that stands out
-- Professional book cover layout with proper text hierarchy
-- Text should be overlaid clearly on the background
-- Ensure text is NOT backwards, mirrored, or upside down
-- Make text large enough to read at thumbnail size
-- Use standard book cover typography conventions`;
+- Title at TOP of cover, author at BOTTOM
+- Professional typography layout
+- NO fancy text effects that could distort letters
+- NO additional text beyond title and author name
+- Focus on accurate letter reproduction over decorative fonts`;
 
       const response = await fetch('/api/generate-cover', {
         method: 'POST',
